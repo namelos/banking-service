@@ -1,11 +1,11 @@
 package account
 
-import java.util.Date
+import org.joda.time.DateTime
 
 case class Balance(
   amount: BigDecimal,
-  ins: Instrument,
-  asOf: Date
+  ins: Instrument = USD,
+  asOf: DateTime = today
 )
 
 
