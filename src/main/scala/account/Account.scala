@@ -5,9 +5,14 @@ import com.github.nscala_time.time.Imports._
 trait Account {
   def number: String
   def name: String
+  def balance: Balance
 }
 
-case class CheckingAccount(number: String, name: String) extends Account
+case class CheckingAccount(
+  number: String,
+  name: String,
+  balance: Balance
+) extends Account
 
 trait InterestBearingAccount extends Account {
   def rateOfInterest: BigDecimal
@@ -16,13 +21,15 @@ trait InterestBearingAccount extends Account {
 case class SavingAccount(
   number: String,
   name: String,
-  rateOfInterest: BigDecimal
+  rateOfInterest: BigDecimal,
+  balance: Balance
 ) extends InterestBearingAccount
 
 case class MoneyMarketingAccount(
   number: String,
   name: String,
-  rateOfInterest: BigDecimal
+  rateOfInterest: BigDecimal,
+  balance: Balance
 ) extends InterestBearingAccount
 
 trait AccountService {
