@@ -4,14 +4,14 @@ import scala.util.Try
 
 trait AccountService {
   def calculateInterest[A <: InterestBearingAccount]: A => Amount =
-      a => a.balance.amount * a.rateOfInterest
+    a => a.balance.amount * a.rateOfInterest
 
-  def deductTax: BigDecimal => BigDecimal =
+  def deductTax: Amount => Amount =
     interest =>
-      if (interest < 1000)
+      if (interest.amount < 1000)
         interest
       else
-        interest - 0.1 * interest
+        interest - (interest * 0.1)
 
   def getCurrencyBalance(a: Account): Try[Amount] = ???
 
