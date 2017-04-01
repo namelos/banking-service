@@ -3,7 +3,7 @@ package account
 import scala.util.Try
 
 trait AccountService {
-  def calculateInterest[A <: InterestBearingAccount]: A => BigDecimal =
+  def calculateInterest[A <: InterestBearingAccount]: A => Amount =
       a => a.balance.amount * a.rateOfInterest
 
   def deductTax: BigDecimal => BigDecimal =
