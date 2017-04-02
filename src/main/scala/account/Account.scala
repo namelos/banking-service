@@ -1,7 +1,5 @@
 package account
 
-import java.util.Date
-
 import org.joda.time.DateTime
 
 trait Account {
