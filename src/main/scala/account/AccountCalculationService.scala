@@ -2,7 +2,7 @@ package account
 
 import scala.util._
 
-trait AccountService {
+trait AccountCalculationService {
   def calculateInterest[A <: InterestBearingAccount](a: A): Try[Amount] =
     if (a.rateOfInterest == 0) Failure(new Exception("Interest Rate not found"))
     else Success(a.balance.amount * a.rateOfInterest)
@@ -28,4 +28,4 @@ trait AccountService {
   } yield (account, result)
 }
 
-object AccountService extends AccountService
+object AccountCalculationService extends AccountCalculationService
