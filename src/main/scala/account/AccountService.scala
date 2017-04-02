@@ -1,16 +1,17 @@
 package account
 
-import scala.util.Try
+import scala.util._
 
 trait AccountService {
-  def calculateInterest[A <: InterestBearingAccount](a: A): Amount =
-    a.balance.amount * a.rateOfInterest
+  def calculateInterest[A <: InterestBearingAccount](a: A): Try[Amount] =
+    if (a.rateOfInterest == 0) Failure(new Exception("Interest Rate not found"))
+    else Success(a.balance.amount * a.rateOfInterest)
 
-  def deductTax(interest: Amount): Amount =
-      if (interest.amount < 1000)
-        interest
-      else
-        interest - (interest * 0.1)
+  def deductTax(interest: Amount): Try[Amount] =
+    if (interest.amount < 1000)
+      Success(interest)
+    else
+      Success(interest - (interest * 0.1))
 
   def getCurrencyBalance(a: Account): Try[Amount] = ???
 

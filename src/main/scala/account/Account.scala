@@ -22,7 +22,7 @@ trait InterestBearingAccount extends Account {
   def rateOfInterest: BigDecimal
 }
 
-case class SavingAccount(
+case class SavingsAccount(
   number: String,
   name: String,
   balance: Balance,
