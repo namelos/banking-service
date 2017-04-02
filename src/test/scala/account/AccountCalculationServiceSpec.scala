@@ -4,9 +4,9 @@ import org.scalatest.FunSpec
 import AccountCalculationService._
 
 class AccountCalculationServiceSpec extends FunSpec {
-  val a1 = SavingsAccount("a-0001", "IBM", Balance(Amount(100000)), today, 0.1)
-  val a2 = SavingsAccount("a-0002", "Google", Balance(Amount(200000)), today, 0.1)
-  val a3 = SavingsAccount("a-0003", "Chase", Balance(Amount(125000)), today, 0.1)
+  val a1 = SavingsAccount("a-0001", "IBM", Balance(Amount(100000)), 0.1, today)
+  val a2 = SavingsAccount("a-0002", "Google", Balance(Amount(200000)), 0.1, today)
+  val a3 = SavingsAccount("a-0003", "Chase", Balance(Amount(125000)), 0.1, today)
 
   describe("AndThen") {
     it("returns same answer as map") {

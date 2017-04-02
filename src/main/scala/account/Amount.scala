@@ -7,5 +7,7 @@ case class Amount(amount: BigDecimal, currency: Currency = USD) {
   def -(a: BigDecimal): Amount = Amount(amount - a, currency)
 
   def *(times: BigDecimal): Amount = Amount(amount * times, currency)
+
+  def <(a: Amount): Boolean = amount < a.amount
 }
 

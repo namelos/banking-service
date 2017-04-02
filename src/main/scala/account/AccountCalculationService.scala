@@ -16,7 +16,7 @@ trait AccountCalculationService {
   def getCurrencyBalance(a: Account): Try[Amount] = Success(a.balance.amount)
 
   def getAccountFrom(no: String): Try[InterestBearingAccount] = Success(
-    SavingsAccount(no, "some-account-name", Balance(Amount(1000L)), today, 0.15))
+    SavingsAccount(no, "some-account-name", Balance(Amount(1000L)), 0.15, today))
 
   def calculateNetAssetValue(a: Account, interest: Amount): Try[Amount] =
     Success(a.balance.amount + interest)
