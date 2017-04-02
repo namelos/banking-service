@@ -3,11 +3,10 @@ package account
 import scala.util.Try
 
 trait AccountService {
-  def calculateInterest[A <: InterestBearingAccount]: A => Amount =
-    a => a.balance.amount * a.rateOfInterest
+  def calculateInterest[A <: InterestBearingAccount](a: A): Amount =
+    a.balance.amount * a.rateOfInterest
 
-  def deductTax: Amount => Amount =
-    interest =>
+  def deductTax(interest: Amount): Amount =
       if (interest.amount < 1000)
         interest
       else

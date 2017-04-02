@@ -13,7 +13,7 @@ class AccountServiceSpec extends FunSpec {
       val accounts = List(a1, a2, a3)
 
       val expected = accounts.map(calculateInterest).map(deductTax)
-      val actual = accounts.map(calculateInterest andThen deductTax)
+      val actual = accounts.map(calculateInterest _ andThen deductTax)
 
       assert(expected == actual)
     }
