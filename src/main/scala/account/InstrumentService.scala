@@ -1,8 +1,5 @@
 package account
 
-/**
-  * Created by namelos on 17-3-31.
-  */
 trait InstrumentService {
   def getMarketValue(e: Equity, a: Amount): Amount
 

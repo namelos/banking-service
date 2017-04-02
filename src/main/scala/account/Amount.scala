@@ -1,6 +1,6 @@
 package account
 
-case class Amount(amount: BigDecimal, currency: Currency) {
+case class Amount(amount: BigDecimal, currency: Currency = USD) {
   def +(a: Amount): Amount = Amount(amount + a.amount, currency)
 
   def -(a: Amount): Amount = Amount(amount - a.amount, currency)
