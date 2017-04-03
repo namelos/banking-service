@@ -20,11 +20,11 @@ trait AccountService[Account, Amount, Balance] {
 object AccountService extends AccountService[Account, Amount, Balance] {
   def open(no: String, name: String, openDate: Option[DateTime]) =
     if (no.isEmpty || name.isEmpty)
-      Failure(new Exception(s"Account no or name cannot be blank"))
+      Failure { new Exception(s"Account no or name cannot be blank") }
     else if (openDate.getOrElse(today) isBefore today)
-      Failure(new Exception(s"Cannot open account in the past"))
+      Failure { new Exception(s"Cannot open account in the past") }
     else
-      Success(SavingsAccount(no, name, Balance(Amount(0)), 0, openDate getOrElse today))
+      Success { Account.savingsAccount(no, name, Balance(Amount(0)), 0, openDate getOrElse today).get }
 
   def close(account: Account, closeDate: Option[DateTime]) = {
     val cd = closeDate getOrElse today
