@@ -30,16 +30,30 @@ final case class MoneyMarketingAccount(number: String, name: String, balance: Ba
 
 object Account {
   def checkingAccount(number: String, name: String, balance: Balance,
-    dateOfOpening: DateTime, dateOfClose: Option[DateTime]): Try[Account] = ???
+    dateOfOpening: DateTime, dateOfClose: Option[DateTime]): Try[Account] = {
+    closeDateCheck(dateOfOpening, dateOfClose) map { d =>
+      CheckingAccount(number, name, balance, d._1, d._2)
+    }
+  }
 
   def savingsAccount(number: String, name: String, balance: Balance,
     rateOfInterest: BigDecimal, dateOfOpening: DateTime, dateOfClose: Option[DateTime] = None) = {
-      closeDateCheck(dateOfOpening, dateOfClose) map { d =>
-        if (rateOfInterest <= BigDecimal(0))
-          throw new Exception(s"Interest rate $rateOfInterest must be > 0")
-        else
-          SavingsAccount(number, name, balance, rateOfInterest, d._1, d._2)
-      }
+    closeDateCheck(dateOfOpening, dateOfClose) map { d =>
+      if (rateOfInterest <= BigDecimal(0))
+        throw new Exception(s"Interest rate $rateOfInterest must be > 0")
+      else
+        SavingsAccount(number, name, balance, rateOfInterest, d._1, d._2)
+    }
+  }
+
+  def moneyMarketingAccount(number: String, name: String, balance: Balance,
+    rateOfInterest: BigDecimal, dateOfOpening: DateTime, dateOfClose: Option[DateTime] = None) = {
+    closeDateCheck(dateOfOpening, dateOfClose) map { d =>
+      if (rateOfInterest <= BigDecimal(0))
+        throw new Exception(s"Interest rate $rateOfInterest must be > 0")
+      else
+        MoneyMarketingAccount(number, name, balance, rateOfInterest, d._1, d._2)
+    }
   }
 
   private def closeDateCheck(openDate: DateTime, closeDate: Option[DateTime]):
