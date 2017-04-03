@@ -5,5 +5,15 @@ case class Lens[O, V] (
   set: (O, V) => O
 )
 
-case class Address(no: String, street: String, city: String, state: String, zip: String)
+object Lens {
+  def compose[Outer, Inner, Value] (
+    outer: Lens[Outer, Inner],
+    inner: Lens[Inner, Value]
+  ) = Lens[Outer, Value] (
+    get = outer.get andThen inner.get,
+    set = (obj, value) => outer.set(obj, inner.set(outer.get(obj), value))
+  )
+}
 
+case class Address(no: String, street: String, city: String, state: String, zip: String)
+case class Customer(no: Int, name: String, address: Address)

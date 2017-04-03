@@ -18,5 +18,24 @@ class LensesSpec extends FunSpec {
 
       assert(addressNoLens.get(modifiedAddress) == "A-10")
     }
+
+    val custAddressLens = Lens[Customer, Address] (
+      get = _.address,
+      set = (o, v) => o.copy(address = v)
+    )
+
+    val custAddrNoLens: Lens[Customer, String] = Lens.compose(custAddressLens, addressNoLens)
+
+    val customer = Customer(2, "John D Cook", address)
+
+    it("should get address number from customer") {
+      assert(custAddrNoLens.get(customer) == "B-12")
+    }
+
+    it("should set address number of customer") {
+      val modifiedCustomer = custAddrNoLens.set(customer, "A-10")
+
+      assert(custAddrNoLens.get(modifiedCustomer) == "A-10")
+    }
   }
 }
