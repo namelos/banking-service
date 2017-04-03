@@ -1,4 +1,4 @@
-package account
+package lib
 
 case class Lens[O, V] (
   get: O => V,
@@ -14,6 +14,3 @@ object Lens {
     set = (obj, value) => outer.set(obj, inner.set(outer.get(obj), value))
   )
 }
-
-case class Address(no: String, street: String, city: String, state: String, zip: String)
-case class Customer(no: Int, name: String, address: Address)

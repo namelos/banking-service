@@ -1,6 +1,10 @@
 package account
 
+import lib.Lens
 import org.scalatest.FunSpec
+
+case class Address(no: String, street: String, city: String, state: String, zip: String)
+case class Customer(no: Int, name: String, address: Address)
 
 class LensesSpec extends FunSpec {
   describe("lenses") {
